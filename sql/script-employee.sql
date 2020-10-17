@@ -1,12 +1,13 @@
-CREATE TABLE "employee" 
-	("id" uuid NOT NULL DEFAULT uuid_generate_v4(), 
-	"name" CHARACTER VARYING(255) NOT NULL, 
-	"job_role" CHARACTER VARYING(255) NOT NULL, 
-	"salary" NUMERIC(12,2) NOT NULL, 
-	"birth" TIMESTAMP NOT NULL, 
-	"employee_registration" INTEGER NOT NULL, 
-	CONSTRAINT "PK_3c2bc72f03fd5abbbc5ac169498" PRIMARY KEY ("id")
-	CONSTRAINT "UQ_de89877abc6c2a90d3cbc875ba6" UNIQUE ("employee_registration"));
+CREATE TABLE public.employee (
+	id uuid NOT NULL,
+	"name" varchar(255) NOT NULL,
+	job_role varchar(255) NOT NULL,
+	salary numeric(12,2) NOT NULL,
+	employee_registration int4 NOT NULL,
+	birth date NOT NULL,
+	CONSTRAINT "PK_3c2bc72f03fd5abbbc5ac169498" PRIMARY KEY (id),
+	CONSTRAINT "UQ_de89877abc6c2a90d3cbc875ba6" UNIQUE (employee_registration)
+);
 
 INSERT INTO public.employee (id,name,job_role,salary,employee_registration,birth) VALUES
 	 ('cd7524ed-b2d3-4d98-a66f-2ccaa8fe1326','Eduardo Neri','Software Engineering',6741.58,798654321,'2009-03-19'),
