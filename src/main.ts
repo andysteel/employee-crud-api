@@ -2,5 +2,5 @@ import { SetupServer } from './server';
 
 const server = new SetupServer();
 
-const port = process.env.SERVER_PORT || '';
+const port = process.env.PORT || '8080';
 server.start(parseInt(port));
