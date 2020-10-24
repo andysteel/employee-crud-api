@@ -4,9 +4,9 @@
   "description": "Aplicação CRUD API em Node.js que alimentará os 3 principais frameworks frontend do mercado.",
   "main": "main.js",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist/* && tsc --traceResolution",
     "start:dev": "ts-node-dev 'src/main.ts'",
-    "start": "npm run build && node dist/main.js",
+    "start": "ts-node src/main.ts",
     "lint": "eslint ./src ./test --ext .ts",
     "lint:fix": "eslint ./src ./test --ext .ts --fix",
     "style:check": "prettier --check 'src/**/*.ts' 'test/**/*.ts'",
@@ -35,11 +35,11 @@
     "@types/cors": "^2.8.8",
     "@types/express": "^4.17.7",
     "@types/jest": "^26.0.9",
-    "@types/module-alias": "^2.0.0",
     "@types/node": "^14.0.27",
     "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
+    "@types/module-alias": "^2.0.0",
     "eslint": "^7.11.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.1",
@@ -63,5 +63,8 @@
     "module-alias": "^2.2.2",
     "pg": "^8.3.3",
     "typeorm": "^0.2.28"
+  },
+  "_moduleAliases": {
+    "@src": "dist"
   }
 }

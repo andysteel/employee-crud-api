@@ -1,11 +1,11 @@
-import './util/module-alias';
+import '@src/util/module-alias';
 import { Logger } from '@overnightjs/logger';
 import { Server } from '@overnightjs/core';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { Application } from 'express';
-import { connection } from './config/typeorm.config';
-import EmployeeController from './controllers/employee.controller';
+import EmployeeController from '@src/controllers/employee.controller';
+import { connection } from '@src/config/typeorm.config';
 
 export class SetupServer extends Server {
   constructor() {

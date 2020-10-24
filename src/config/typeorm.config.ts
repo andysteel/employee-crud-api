@@ -11,8 +11,8 @@ export const connection = async () => await createConnection({
   type: 'postgres',
   url: process.env.DS_URL,
   entities: [`${__dirname}/../**/*.entity.{js,ts}`],
-  synchronize: isSyncronize,
-  logNotifications: true,
+  synchronize: true,
+  logNotifications: isSyncronize,
   //log for debug
   //logging: ['query'],
 }).catch((error) => { throw new Error(`Erro ao tentar conexão com o banco.${error}`); });

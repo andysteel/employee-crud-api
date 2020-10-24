@@ -1,4 +1,6 @@
-import { Controller, Delete, Get, Post, Put } from '@overnightjs/core';
+import {
+  Controller, Delete, Get, Post, Put,
+} from '@overnightjs/core';
 import { EmployeeRepository } from '@src/repositories/employee.repository';
 import { Response, Request } from 'express';
 import { getCustomRepository } from 'typeorm';
@@ -14,7 +16,7 @@ export default class EmployeeController {
   @Post()
   private createEmployee(req: Request, res: Response) {
     const employee = getCustomRepository(EmployeeRepository).saveEmployee(req.body);
-    employee.then(response => handleResponseSuccess(res, StatusCodes.CREATED, response))
+    employee.then((response) => handleResponseSuccess(res, StatusCodes.CREATED, response))
       .catch((error) => {
         Logger.Err(error.stack);
         handleResponseError(res, StatusCodes.BAD_REQUEST, error.message);
@@ -75,7 +77,7 @@ export default class EmployeeController {
       }
       if (saved) {
         saved
-          .then(value => handleResponseSuccess(res, StatusCodes.OK, value))
+          .then((value) => handleResponseSuccess(res, StatusCodes.OK, value))
           .catch((error) => {
             Logger.Err(error.stack);
             handleResponseError(res, StatusCodes.BAD_REQUEST, error.message);

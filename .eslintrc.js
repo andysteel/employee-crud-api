@@ -26,5 +26,6 @@ module.exports = {
     'spaced-comment': 'off',
     'import/imports-first': 'off',
     'import/extensions': 'off',
+    'no-return-await': 'off',
   },
 };
