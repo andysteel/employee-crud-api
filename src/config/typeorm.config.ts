@@ -11,7 +11,7 @@ export const connection = async () => await createConnection({
   type: 'postgres',
   url: process.env.DS_URL,
   entities: [`${__dirname}/../**/*.entity.{js,ts}`],
-  synchronize: true,
+  synchronize: isSyncronize,
   logNotifications: isSyncronize,
   //log for debug
   //logging: ['query'],

@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "build": "rm -rf dist/* && tsc --traceResolution",
-    "start:dev": "ts-node-dev 'src/main.ts'",
-    "start": "ts-node src/main.ts",
+    "start:dev": "NODE_ENV=development ts-node-dev 'src/main.ts'",
+    "start": "NODE_ENV=production node dist/main.js",
     "lint": "eslint ./src ./test --ext .ts",
     "lint:fix": "eslint ./src ./test --ext .ts --fix",
     "style:check": "prettier --check 'src/**/*.ts' 'test/**/*.ts'",
@@ -55,6 +55,7 @@
     "@overnightjs/logger": "^1.2.0",
     "@types/config": "0.0.36",
     "body-parser": "^1.19.0",
+    "class-validator": "^0.12.2",
     "config": "^3.3.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -65,6 +66,10 @@
     "typeorm": "^0.2.28"
   },
   "_moduleAliases": {
-    "@src": "dist"
+    "@config": "dist/config",
+    "@controllers": "dist/controllers",
+    "@models": "dist/models",
+    "@repositories": "dist/repositories",
+    "@util": "dist/util"
   }
 }

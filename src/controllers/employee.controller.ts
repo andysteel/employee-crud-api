@@ -1,14 +1,14 @@
 import {
   Controller, Delete, Get, Post, Put,
 } from '@overnightjs/core';
-import { EmployeeRepository } from '@src/repositories/employee.repository';
+import { EmployeeRepository } from '@repositories/employee.repository';
 import { Response, Request } from 'express';
 import { getCustomRepository } from 'typeorm';
 import { StatusCodes } from 'http-status-codes';
 import config from 'config';
 import { Logger } from '@overnightjs/logger';
-import { PaginationEmployee } from '@src/types/application.types';
-import { handleResponseError, handleResponseSuccess, UPDATE_ERROR } from '@src/util/handle-response';
+import { handleResponseError, handleResponseSuccess, UPDATE_ERROR } from '@util/handle-response';
+import { PaginationEmployee } from '../types/application.types';
 
 @Controller(`${config.get('apiVersion')}/employees`)
 export default class EmployeeController {
@@ -21,6 +21,17 @@ export default class EmployeeController {
         Logger.Err(error.stack);
         handleResponseError(res, StatusCodes.BAD_REQUEST, error.message);
       });
+  }
+
+  @Get('')
+  private countEmployees(req: Request, res: Response) {
+    const total = getCustomRepository(EmployeeRepository).countEmployees();
+    total.then((response) => {
+      handleResponseSuccess(res, StatusCodes.OK, response);
+    }).catch((error) => {
+      Logger.Err(error.stack);
+      handleResponseError(res, StatusCodes.BAD_REQUEST, error.message);
+    });
   }
 
   @Get('index/:index/size/:size')

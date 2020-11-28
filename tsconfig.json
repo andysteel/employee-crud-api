@@ -17,9 +17,13 @@
       "noImplicitReturns": true,
       "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,
-      "baseUrl": ".",
+      "baseUrl": "./src",
       "paths": {
-        "@src/*": ["./src/*"],
+        "@config/*": ["config/*"],
+        "@controllers/*": ["controllers/*"],
+        "@models/*": ["models/*"],
+        "@repositories/*": ["repositories/*"],
+        "@util/*": ["util/*"],
         "@test/*": ["./test/*"]
       },
       "rootDirs": [

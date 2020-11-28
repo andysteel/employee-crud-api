@@ -1,11 +1,10 @@
-import '@src/util/module-alias';
 import { Logger } from '@overnightjs/logger';
 import { Server } from '@overnightjs/core';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { Application } from 'express';
-import EmployeeController from '@src/controllers/employee.controller';
-import { connection } from '@src/config/typeorm.config';
+import EmployeeController from '@controllers/employee.controller';
+import { connection } from '@config/typeorm.config';
 
 export class SetupServer extends Server {
   constructor() {
@@ -13,8 +12,8 @@ export class SetupServer extends Server {
     this.init();
   }
 
-  public init(): void {
-    this.connectDb();
+  public async init(): Promise<void> {
+    await this.connectDb();
     this.setupExpress();
     this.setupControllers();
   }
@@ -32,8 +31,10 @@ export class SetupServer extends Server {
     this.addControllers([employeeController], undefined, cors());
   }
 
-  private connectDb(): void {
-    connection();
+  private async connectDb(): Promise<void> {
+    await connection().then(value => {
+      value.entityMetadatas.forEach(e => Logger.Info(`Entities mapped ${e.name} - ${e.tableName}`));
+    });
   }
 
   public start(port: number): void {

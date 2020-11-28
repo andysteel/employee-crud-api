@@ -1,6 +1,6 @@
-import { Employee } from '@src/models/employee.entity';
-import { PaginationEmployee } from '@src/types/application.types';
+import { Employee } from '@models/employee.entity';
 import { EntityRepository, Repository } from 'typeorm';
+import { PaginationEmployee } from '../types/application.types';
 
 @EntityRepository(Employee)
 export class EmployeeRepository extends Repository<Employee> {
@@ -11,6 +11,7 @@ export class EmployeeRepository extends Repository<Employee> {
     entity.jobRole = employee.jobRole;
     entity.birth = employee.birth;
     entity.salary = employee.salary;
+    this.validateRegistrationLength(employee);
     entity.employeeRegistration = employee.employeeRegistration;
 
     await entity.save();
@@ -29,6 +30,10 @@ export class EmployeeRepository extends Repository<Employee> {
     });
   }
 
+  async countEmployees(): Promise<number> {
+    return await this.count();
+  }
+
   async getEmployee(id: string): Promise<Employee | undefined> {
     return await this.findOne(id);
   }
@@ -40,6 +45,13 @@ export class EmployeeRepository extends Repository<Employee> {
   }
 
   async updateEmployee(employee: Employee): Promise<Employee> {
+    this.validateRegistrationLength(employee);
     return await this.save(employee);
+  }
+
+  private validateRegistrationLength(employee: Employee) {
+    if (employee.employeeRegistration.toString().trim().length < 10) {
+      throw new Error('The Registration must have 10 numbers');
+    }
   }
 }

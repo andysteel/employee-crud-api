@@ -27,5 +27,6 @@ module.exports = {
     'import/imports-first': 'off',
     'import/extensions': 'off',
     'no-return-await': 'off',
+    'arrow-parens': 'off',
   },
 };
