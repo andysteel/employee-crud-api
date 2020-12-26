@@ -24,11 +24,12 @@ export class SetupServer extends Server {
 
   private setupExpress(): void {
     this.app.use(bodyParser.json());
+    this.app.use(cors({ origin: ['https://angular-employee.vercel.app'] }));
   }
 
   private setupControllers(): void {
     const employeeController = new EmployeeController();
-    this.addControllers([employeeController], undefined, cors());
+    this.addControllers([employeeController]);
   }
 
   private async connectDb(): Promise<void> {
